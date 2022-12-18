@@ -1,0 +1,37 @@
+
+
+<%= form_tag survey_response_path(@survey_response), id: "survey_response_form", method: :put do %>
+<table class="table table-striped">
+
+  <%count = 0%>
+  <%@question_categories.each do |category, questions|%>
+  <%count += 1%>
+  <tr>
+    <td><label for="name"><%= count%></label></td>
+    <td>
+      <label for="name">
+        <b><%= category%></b>
+      </label>
+    </td>
+    <td width="60%">
+    </td>
+  </tr>
+  <%questions.each_with_index do |question, idx|%>
+  <tr>
+    <td>
+      <%= count%>.<%= idx + 1%>
+    </td>
+    <td>      
+       <%= question.body%>
+       <%= hidden_field_tag 'questions[]', @survey_questions_hash[question.id]%>
+   </td>
+   <td width="60%"><%= text_field_tag 'answers[]', @survey_answers_hash[@survey_questions_hash[question.id]], {placeholder: 'Enter Answer', class: 'input-large', size: "80"}%>
+    <%= hidden_field_tag 'answers_ids[]', @survey_answers_ids_hash[@survey_questions_hash[question.id]] if @survey_answers_hash.present?%>
+   </td>
+ </tr>
+ <%end%>
+ <%end%>
+
+</table>
+<div><%= submit_tag 'Submit' %></div>
+<%end%>

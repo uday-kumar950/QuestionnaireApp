@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  body: MyText
+  active: false
+  question_category: one
+
+two:
+  body: MyText
+  active: false
+  question_category: two

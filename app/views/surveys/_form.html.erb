@@ -1,0 +1,40 @@
+<%= form_tag surveys_path, id: "survey_form" do %>
+
+<%count = 0%>
+<%@question_categories.each do |category, questions|%>
+
+<div class="cls_cat_question">
+  <input type="checkbox"/><%= category%>
+</div>
+<div>
+  <%count += 1%>
+<ul class="cls_question">
+  <%questions.each_with_index do |question, idx|%>
+  <li>
+    <%= check_box_tag 'questions[]', question.id, false, class: "cls_chk_questions" %><%= count%>.<%= idx+1%>
+    <%= question.body%>
+  </li>
+  <%end%>
+</ul>
+</div>
+<%end%>
+<div>
+  <%= select_tag 'user_ids', options_for_select(@users),{class: "select",  multiple: true, required: true} %>
+</div>
+ <div><%= submit_tag 'Send New QuestionSet' %></div>
+<%end%>
+
+
+<script type="text/javascript">
+    //  $(document).ready(function() {
+    //     $('#multiple-checkboxes').multiselect({
+    //       includeSelectAllOption: true,
+    //     });
+    // });
+
+     $(document).ready(function() {
+    
+});
+  </script>
+
+

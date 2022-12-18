@@ -1,0 +1,40 @@
+<p style="color: green"><%= notice %></p>
+
+
+<table class="table table-striped">
+  <%count = 0%>
+  <%@question_categories.each do |category, questions|%>
+  <%count += 1%>
+  <tr>
+    <td><label for="name"><%= count%></label></td>
+    <td>
+      <label for="name">
+        <b><%= category%></b>
+      </label>
+    </td>
+    <td width="60%">
+    </td>
+  </tr>
+  <%questions.each_with_index do |question, idx|%>
+  <tr>
+    <td>
+      <%= count%>.<%= idx + 1%>
+    </td>
+    <td>      
+       <%= question.body%>
+   </td>
+   <td width="60%"><%= @survey_answers_hash[@survey_questions_hash[question.id]]%>
+   </td>
+ </tr>
+ <%end%>
+ <%end%>
+
+</table>
+
+
+<div>
+  <%= link_to "Edit", edit_survey_response_path(@survey_response) %> |
+  <%= link_to "Back", survey_responses_path %>
+
+  <%#= button_to "Destroy this survey response", @survey_response, method: :delete %>
+</div>

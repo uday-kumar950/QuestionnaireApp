@@ -1,0 +1,41 @@
+
+
+<%#= link_to "New survey response", new_survey_response_path %>
+
+<div class="container">
+  <h2>Question Sets</h2>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Sets</th>
+        <%if current_user.admin?%>
+          <th>Email</th>
+          <th>Response Date</th>
+        <%end%>
+        <th>PDF</th>
+        <%if !current_user.admin?%>
+        <th>Action</th>
+        <%end%>
+      </tr>
+    </thead>
+    <tbody>
+      <% @survey_responses.each do |survey_response| %>
+      <tr>
+        <td><%= survey_response.survey.try(:code_name).upcase %></td>
+        <%if current_user.admin?%>
+        <td><%= @users_hash[survey_response.user_id] %></td>
+        <td><%= survey_response.response_date%>
+        <%end%>
+        <td><%= link_to download_pdf_survey_response_path(survey_response), target: '_blank', class: "btn btn-info" do%> 
+          <i class='glyphicon glyphicon-download-alt'> </i> Download
+          <%end%>
+        </td>
+        <%if !current_user.admin?%>
+        <td>
+          <%= link_to "Edit QuestionSet", edit_survey_response_path(survey_response)%>
+        </td>
+        <%end%>
+      </tr>
+      <%end%>
+    </tbody>
+  </table>
