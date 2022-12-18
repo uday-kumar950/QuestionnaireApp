@@ -72,7 +72,7 @@ group :test do
   gem "selenium-webdriver"
   gem "webdrivers"
 end
-
+gem "paranoia"
 gem 'devise'
 gem 'bootstrap-sass'
 gem 'sass-rails'

@@ -32,37 +32,15 @@ class SurveysController < ApplicationController
         users.each do |user|
           Survey.transaction do
             survey.save
-            questions.each do |question|
-              survey_question = SurveyQuestion.new
-              survey_question.question = question
-              survey_question.survey = survey
-              survey_question.save
-            end
-            survey_response = SurveyResponse.new
-            survey_response.user = user
-            survey_response.survey = survey
-            survey_response.status = false
-            survey_response.save
+            survey.create_survey_details(questions, user)
           end
         end
         format.html { redirect_to survey_url(survey), notice: "QuestionSet was successfully created." }
         format.json { render :new, status: :created }
       else
         format.html { render :new, status: :unprocessable_entity }
-        #format.json { render json: @survey.errors, status: :unprocessable_entity }
       end
     end
-
-
-    # respond_to do |format|
-    #   if @survey.save
-    #     format.html { redirect_to survey_url(@survey), notice: "Survey was successfully created." }
-    #     format.json { render :show, status: :created, location: @survey }
-    #   else
-    #     format.html { render :new, status: :unprocessable_entity }
-    #     format.json { render json: @survey.errors, status: :unprocessable_entity }
-    #   end
-    # end
   end
 
   # PATCH/PUT /surveys/1 or /surveys/1.json

@@ -25,7 +25,7 @@ class QuestionCategoriesController < ApplicationController
 
     respond_to do |format|
       if @question_category.save
-        format.html { redirect_to question_category_url(@question_category), notice: "Question category was successfully created." }
+        format.html { redirect_to question_categories_url, notice: "Question category was successfully created." }
         format.json { render :show, status: :created, location: @question_category }
       else
         format.html { render :new, status: :unprocessable_entity }

@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   resources :survey_responses do
     member do
       get 'download_pdf', :defaults => { :format => 'pdf' }
+      get 'send_pdf_document'
     end
   end
   resources :questions

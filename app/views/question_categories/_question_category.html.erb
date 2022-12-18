@@ -1,12 +1,10 @@
-<div id="<%= dom_id question_category %>">
-  <p>
-    <strong>Name:</strong>
-    <%= question_category.name %>
-  </p>
 
-  <p>
-    <strong>Status:</strong>
-    <%= question_category.active ? 'Active' : 'Inactive' %>
-  </p>
+<tr>
+  <td><%= question_category.name %></td>
+  <td><%= question_category.active ? 'Active' : 'Inactive' %></td>
+  <td><%= link_to question_category_path(question_category), method: :delete do %>
+    <span class="glyphicon glyphicon-remove"></span> Remove 
+    <%end%>
+  </td>
+</tr>
 
-</div>

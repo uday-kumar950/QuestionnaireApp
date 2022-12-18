@@ -11,17 +11,17 @@
     </div>
   <% end %>
 
-  <div>
+  <div class="col-md-2">
     <%= form.label :name, style: "display: block" %>
-    <%= form.text_field :name %>
+    <%= form.text_field :name,  class: 'form-control' %>
   </div>
 
-  <div>
+  <div class="col-md-1">
     <%= form.label :status, style: "display: block" %>
-    <%= form.check_box :active %>
+    <%= form.check_box :active, class: 'form-control' %>
   </div>
 
-  <div>
-    <%= form.submit %>
+  <div class="col-md-1">
+    <br><%= form.submit 'Save',class: "btn btn-primary" %>
   </div>
 <% end %>

@@ -1,5 +1,5 @@
 class SurveyResponsesController < ApplicationController
-  before_action :set_survey_response, only: %i[ show edit update destroy download_pdf]
+  before_action :set_survey_response, only: %i[ show edit update destroy download_pdf send_pdf_document]
 
   # GET /survey_responses or /survey_responses.json
   def index
@@ -68,16 +68,21 @@ class SurveyResponsesController < ApplicationController
     #layout 'pdf'
      @survey_questions_hash, @survey_answers_hash, @survey_answers_ids_hash, @question_categories = @survey_response.get_details
      respond_to do |format|
-            format.html
-            format.pdf do
-                render pdf: "Invoice No. ",
-                page_size: 'A4',
-                layout: "pdf",
-                formats: [:html],
-                zoom: 1.28,
-                dpi: 75
-            end
+        format.html
+        format.pdf do
+            render pdf: "Invoice No. ",
+            page_size: 'A4',
+            layout: "pdf",
+            formats: [:html],
+            zoom: 1.28,
+            dpi: 75
+        end
       end
+  end
+
+  def send_pdf_document    
+     UserMailer.new_survey_email(@survey_response.user).deliver_now
+     redirect_to survey_responses_url, notice: "QuestionSet was successfully created."
   end
 
   private

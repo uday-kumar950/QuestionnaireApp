@@ -1,10 +1,11 @@
 class QuestionsController < ApplicationController
-  before_action :set_question, only: %i[ show edit update destroy ]
   before_action :get_question_categories, only: %i[ index new edit create ]
+  before_action :set_question, only: %i[ show edit update destroy ]
 
   # GET /questions or /questions.json
   def index
-    @questions = Question.all
+    question_category_ids = @question_categories.collect{|a| a[1]}
+    @questions = Question.where(question_category_id: question_category_ids)
   end
 
   # GET /questions/1 or /questions/1.json
@@ -26,7 +27,7 @@ class QuestionsController < ApplicationController
 
     respond_to do |format|
       if @question.save
-        format.html { redirect_to question_url(@question), notice: "Question was successfully created." }
+        format.html { redirect_to questions_url(@question), notice: "Question was successfully created." }
         format.json { render :show, status: :created, location: @question }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -65,7 +66,7 @@ class QuestionsController < ApplicationController
     end
 
     def get_question_categories
-      @question_categories = QuestionCategory.all.pluck(:name,:id)
+      @question_categories = QuestionCategory.all.without_deleted.pluck(:name,:id)
     end
 
     # Only allow a list of trusted parameters through.
