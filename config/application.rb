@@ -45,7 +45,7 @@ module QuestionnaireApp
       :address        => ENV['MAILGUN_SMTP_SERVER'],
       :user_name      => ENV['MAILGUN_SMTP_LOGIN'],
       :password       => ENV['MAILGUN_SMTP_PASSWORD'],
-      :domain         => 'herokuapp.com',
+      :domain         => 'quiet-retreat-08806.herokuapp.com',
       :authentication => :plain,
     }
 
