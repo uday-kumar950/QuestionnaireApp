@@ -33,12 +33,11 @@ module QuestionnaireApp
     ActionMailer::Base.perform_deliveries = true
     ActionMailer::Base.smtp_settings = {
     :address   => "smtp.mailgun.org",
-    :domain => 'quiet-retreat-08806.herokuapp.com',
+    :domain => 'herokuapp.com',
     :port      => ENV['MAILGUN_SMTP_PORT'],
     :user_name => ENV['MAILGUN_SMTP_LOGIN'],
     :password  => ENV['MAILGUN_SMTP_PASSWORD'], 
-    :authentication => :plain,
-    :enable_starttls_auto => true
+    :authentication => :plain
     }
     # ActionMailer::Base.smtp_settings = {
     #   :port           => ENV['MAILGUN_SMTP_PORT'],
