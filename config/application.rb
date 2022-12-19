@@ -27,7 +27,7 @@ module QuestionnaireApp
     #   authentication:       'plain',
     #   enable_starttls_auto: true  
     # }
-    #config.action_mailer.default_url_options = { :host => 'quiet-retreat-08806.herokuapp.com/' }
+    config.action_mailer.default_url_options = { :host => 'quiet-retreat-08806.herokuapp.com/' }
     config.action_mailer.raise_delivery_errors = true
     ActionMailer::Base.delivery_method = :smtp
     ActionMailer::Base.perform_deliveries = true
@@ -45,7 +45,7 @@ module QuestionnaireApp
       :address        => ENV['MAILGUN_SMTP_SERVER'],
       :user_name      => ENV['MAILGUN_SMTP_LOGIN'],
       :password       => ENV['MAILGUN_SMTP_PASSWORD'],
-      :domain         => ENV['MAILGUN_DOMAIN'],
+      :domain         => 'herokuapp.com',
       :authentication => :plain,
     }
 
