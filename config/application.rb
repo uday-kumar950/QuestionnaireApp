@@ -27,7 +27,7 @@ module QuestionnaireApp
       authentication:       'plain',
       enable_starttls_auto: true  
     }
-
+    config.assets.initialize_on_precompile = false
     #ActionMailer::Base.default_content_type = "text/html"
   end
 end
