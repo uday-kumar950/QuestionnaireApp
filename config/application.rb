@@ -27,19 +27,28 @@ module QuestionnaireApp
     #   authentication:       'plain',
     #   enable_starttls_auto: true  
     # }
-    config.action_mailer.default_url_options = { :host => 'quiet-retreat-08806.herokuapp.com/' }
+    #config.action_mailer.default_url_options = { :host => 'quiet-retreat-08806.herokuapp.com/' }
     config.action_mailer.raise_delivery_errors = true
     ActionMailer::Base.delivery_method = :smtp
     ActionMailer::Base.perform_deliveries = true
-    ActionMailer::Base.smtp_settings = {
-    :address   => "smtp.gmail.com",
-    :domain => 'herokuapp.com',
-    :port      => 25,
-    :user_name => "dasudaykumar017@gmail.com",
-    :password  => '4Unrt9nhU+Drb~$', 
-    :authentication => :plain,
-    :enable_starttls_auto => true
-    }
+    # ActionMailer::Base.smtp_settings = {
+    # :address   => "smtp.gmail.com",
+    # :domain => 'herokuapp.com',
+    # :port      => 25,
+    # :user_name => "dasudaykumar017@gmail.com",
+    # :password  => '4Unrt9nhU+Drb~$', 
+    # :authentication => :plain,
+    # :enable_starttls_auto => true
+    # }
+ActionMailer::Base.smtp_settings = {
+  :port           => ENV['MAILGUN_SMTP_PORT'],
+  :address        => ENV['MAILGUN_SMTP_SERVER'],
+  :user_name      => ENV['MAILGUN_SMTP_LOGIN'],
+  :password       => ENV['MAILGUN_SMTP_PASSWORD'],
+  :domain         => 'quiet-retreat-08806.herokuapp.com',
+  :authentication => :plain,
+}
+
     config.assets.initialize_on_precompile = false
     #ActionMailer::Base.default_content_type = "text/html"
   end
