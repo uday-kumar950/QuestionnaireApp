@@ -35,8 +35,8 @@ module QuestionnaireApp
     :address   => "smtp.gmail.com",
     :domain => 'herokuapp.com',
     :port      => 25,
-    :user_name => "udaykumardas950@gmail.com",
-    :password  => 'Shiv@123*', 
+    :user_name => "dasudaykumar017@gmail.com",
+    :password  => '4Unrt9nhU+Drb~$', 
     :authentication => :plain,
     :enable_starttls_auto => true
     }
