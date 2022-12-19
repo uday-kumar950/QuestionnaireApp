@@ -29,9 +29,9 @@
         <td><%= link_to download_pdf_survey_response_path(survey_response), target: '_blank', class: "btn btn-info"  do%> 
           <i class='glyphicon glyphicon-download-alt'> Download</i> 
           <%end%>
-          <%= link_to send_pdf_document_survey_response_path(survey_response), class: "btn btn-info"  do%> 
-          <i class='glyphicon glyphicon glyphicon-envelope'> Email</i> 
-          <%end%>
+          <%#= link_to send_pdf_document_survey_response_path(survey_response), class: "btn btn-info"  do%> 
+          <!-- <i class='glyphicon glyphicon glyphicon-envelope'> Email</i> --> 
+          <%#end%>
 
         </td>
         <%if !current_user.admin?%>

@@ -16,6 +16,7 @@ class Survey < ApplicationRecord
 		  survey_question.survey = self
 		  survey_question.save
 		end
+		
 		survey_response = SurveyResponse.new
 		survey_response.user = user
 		survey_response.survey = self
