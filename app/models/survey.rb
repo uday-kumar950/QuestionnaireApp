@@ -6,10 +6,10 @@ class Survey < ApplicationRecord
 
 	def set_code_name
 		code_name = "DOC" + ("%05d" % id).to_s
-        self.update_attribute(:code_name, code_name)
+        self.update_attribute(:code_name, code_name.upcase)
 	end
 
-	def create_survey_details(questions, user)
+	def create_survey_details(questions, user, sub_code)
 		questions.each do |question|
 		  survey_question = SurveyQuestion.new
 		  survey_question.question = question
@@ -20,6 +20,7 @@ class Survey < ApplicationRecord
 		survey_response.user = user
 		survey_response.survey = self
 		survey_response.status = false
+		survey_response.code_name = self.code_name + "-" + ("%03d" % sub_code).to_s.upcase
 		survey_response.save
   end
 end

@@ -2,12 +2,11 @@
 
 <%count = 0%>
 <%@question_categories.each do |category, questions|%>
-
+  <%count += 1%>
 <div class="cls_cat_question">
-  <input type="checkbox" /><%= category%>
+  <input type="checkbox" /><b><%= count%>. <%= category%></b>
 </div>
 <div>
-  <%count += 1%>
   <ul class="cls_question">
     <%questions.each_with_index do |question, idx|%>
     <li>

@@ -1,5 +1,6 @@
 class SurveysController < ApplicationController
   before_action :set_survey, only: %i[ show edit update destroy ]
+  before_action :get_question_categories, only: %i[ new create edit ]
 
   # GET /surveys or /surveys.json
   def index
@@ -13,9 +14,7 @@ class SurveysController < ApplicationController
 
   # GET /surveys/new
   def new
-    #@survey = Survey.new
-    @question_categories = QuestionCategory.joins(:questions).select('name', 'body', 'questions.id').group_by(&:name)
-    @users = User.where(admin: false).pluck(:email, :id)
+    
   end
 
   # GET /surveys/1/edit
@@ -29,10 +28,10 @@ class SurveysController < ApplicationController
     respond_to do |format|
       if users.present? && questions.present?
           survey = Survey.new
-        users.each do |user|
+        users.each_with_index do |user, idx|
           Survey.transaction do
             survey.save
-            survey.create_survey_details(questions, user)
+            survey.create_survey_details(questions, user, idx+1)
           end
         end
         format.html { redirect_to survey_url(survey), notice: "QuestionSet was successfully created." }
@@ -70,6 +69,11 @@ class SurveysController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_survey
       @survey = Survey.find(params[:id])
+    end
+
+    def get_question_categories
+      @question_categories = QuestionCategory.where('question_categories.active = ? and questions.active = ?', true, true).joins(:questions).select('name', 'body', 'questions.id').group_by(&:name)
+      @users = User.where(admin: false).pluck(:email, :id)
     end
 
     # Only allow a list of trusted parameters through.

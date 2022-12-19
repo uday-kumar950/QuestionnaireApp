@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_12_18_185544) do
+ActiveRecord::Schema[7.0].define(version: 2022_12_19_093106) do
   create_table "question_categories", charset: "utf8mb4", force: :cascade do |t|
     t.string "name"
     t.boolean "active"
@@ -55,6 +55,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_18_185544) do
     t.datetime "updated_at", null: false
     t.date "response_date"
     t.boolean "status"
+    t.string "code_name"
     t.index ["survey_id"], name: "index_survey_responses_on_survey_id"
     t.index ["user_id"], name: "index_survey_responses_on_user_id"
   end

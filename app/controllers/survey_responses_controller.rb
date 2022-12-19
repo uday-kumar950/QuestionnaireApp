@@ -65,12 +65,11 @@ class SurveyResponsesController < ApplicationController
   end
 
   def download_pdf
-    #layout 'pdf'
      @survey_questions_hash, @survey_answers_hash, @survey_answers_ids_hash, @question_categories = @survey_response.get_details
      respond_to do |format|
         format.html
         format.pdf do
-            render pdf: "Invoice No. ",
+            render pdf: "#{@survey_response.code_name}",
             page_size: 'A4',
             layout: "pdf",
             formats: [:html],
@@ -78,11 +77,20 @@ class SurveyResponsesController < ApplicationController
             dpi: 75
         end
       end
+    #  pdf = render  pdf: @survey_response.code_name,
+    #   layout: 'pdf.html.erb',
+    #   show_as_html: false,
+    #   encoding: 'UTF-8'
+
+    # send_data pdf, filename: "project_report.pdf", type: "application/pdf", disposition: "attachment"
   end
 
   def send_pdf_document    
      UserMailer.new_survey_email(@survey_response.user).deliver_now
-     redirect_to survey_responses_url, notice: "QuestionSet was successfully created."
+     respond_to do |format|
+      format.html { redirect_to survey_responses_url, notice: "Email successfully sent." }
+      format.json { head :no_content }
+    end
   end
 
   private

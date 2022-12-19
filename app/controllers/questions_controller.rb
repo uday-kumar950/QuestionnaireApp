@@ -66,7 +66,7 @@ class QuestionsController < ApplicationController
     end
 
     def get_question_categories
-      @question_categories = QuestionCategory.all.without_deleted.pluck(:name,:id)
+      @question_categories = QuestionCategory.where(active: true).without_deleted.pluck(:name,:id)
     end
 
     # Only allow a list of trusted parameters through.
